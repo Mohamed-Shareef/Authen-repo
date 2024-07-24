@@ -1,25 +1,47 @@
-import logo from './logo.svg';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { createBrowserRouter,RouterProvider,Outlet} from 'react-router-dom';
 import './App.css';
+import Home from './component/home';
+import Login from './component/login';
+import Register from './component/register';
+import reportWebVitals from './reportWebVitals';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Outlet/>
     </div>
   );
 }
 
 export default App;
+
+const approuter=createBrowserRouter([
+  {
+    path:"/",
+    element:<App/>,
+    children:[
+       {
+      path:"/",
+      element:<Login/>
+    },
+    {
+      path:"/home",
+      element:<Home/>
+    },
+    {
+      path:"/register",
+      element:<Register/>
+    },]
+  }
+ 
+
+])
+
+
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(<RouterProvider router={approuter}/>);
+
+reportWebVitals();
